@@ -22,7 +22,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			ships: [],
 
-			singleCharacter: []
+			singleCharacter: null,
+
+			singlePlanet: null,
+
+			singleStarship: null
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -115,10 +119,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ singleCharacter: data.result.properties })
 					})
 					.catch(err => console.error(err))
-			}
+			},
+			getSinglePlanet: (id) => {	
+				fetch(`https://www.swapi.tech/api/planets/${id}`)
+					.then(res => res.json())
+					.then((data) => {
+						console.log(data);
+						/////Store the data in the STORE to get access
+						setStore({ singlePlanet: data.result.properties })
+					})
+					.catch(err => console.error(err))
+			},
+			getSingleStarship: (id) => {	
+				fetch(`https://www.swapi.tech/api/starships/${id}`)
+					.then(res => res.json())
+					.then((data) => {
+						console.log(data);
+						/////Store the data in the STORE to get access
+						setStore({ singleStarship: data.result.properties })
+					})
+					.catch(err => console.error(err))
+			},
+			addToFavourites: (item) =>{
+				const store = getStore();
+				setStore({favourites: [...store.favourites,item]})
+			},
+			removeFromFavourites: (name) =>{
+				const store = getStore();
+				setStore({favourites: store.favourites.filter((favourite)=>favourite.name !== name)
+			
+				})
+				
+			}	
+	
+
 		}
-
-
 	};
 };
 

@@ -3,3 +3,12 @@
     height: 90px;
     object-fit: cover;
 }
+.heart {
+    border: none;
+}
+
+img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+  }
